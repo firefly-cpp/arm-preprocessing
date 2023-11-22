@@ -1,2 +1,2 @@
 # arm-preprocessing
-Implementation of several preprocessing trchniques for Association Rule Mining (ARM)
+Implementation of several preprocessing techniques for Association Rule Mining (ARM)

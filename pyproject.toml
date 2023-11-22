@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "arm-preprocessing"
 version = "0.1.0"
-description = "Implementation of several preprocessing trchniques for Association Rule Mining (ARM)"
+description = "Implementation of several preprocessing techniques for Association Rule Mining (ARM)"
 authors = ["firefly-cpp <iztok@iztok-jr-fister.eu>"]
 
 [tool.poetry.dependencies]
