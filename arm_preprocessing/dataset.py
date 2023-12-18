@@ -8,7 +8,7 @@ class Dataset:
             raise ValueError(f'Invalid format: {format}')
 
         # Initialise attributes
-        self.filename = filename
+        self.filename = f'{filename}.{format}'
         self.format = format
         self.target_format = target_format
         self.datetime_columns = [datetime_columns]
@@ -28,3 +28,17 @@ class Dataset:
                 data = pd.read_json(
                     self.filename, parse_dates=self.datetime_columns, orient='records')
         return data
+
+    def convert_data(self, data, target_format=None, output_filename='converted_data'):
+        # Validate target format
+        if target_format is None:
+            raise ValueError('Target format not specified')
+
+        # Prepare output filepath
+        output_filepath = f'{output_filename}.{target_format}'
+
+        # Convert data
+        if target_format == 'csv':
+            data.to_csv(output_filepath, index=False)
+        elif target_format == 'json':
+            data.to_json(output_filepath, orient='records')
