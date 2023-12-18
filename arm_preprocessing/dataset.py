@@ -96,3 +96,15 @@ class Dataset:
 
         # Store information
         self.information = information
+
+    def dataset_statistics(self):
+        print('Number of attributes: ', len(self.data.columns))
+
+        for column in self.information['columns']:
+            if column['type'] == 'categorical':
+                print(f'{column["column"]}, : {column["categories"]}')
+            if column['type'] == 'numerical':
+                print(
+                    f'{column["column"]}: {column["min"]}-{column["max"]}')
+            if column['type'] == 'text':
+                print(f'{column["column"]}: long text')
