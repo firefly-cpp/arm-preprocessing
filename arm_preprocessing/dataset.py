@@ -12,6 +12,7 @@ class Dataset:
         self.format = format
         self.target_format = target_format
         self.datetime_columns = [datetime_columns]
+        self.information = {}
 
     def load_data(self):
         # Load data from file
@@ -27,9 +28,12 @@ class Dataset:
             else:
                 data = pd.read_json(
                     self.filename, parse_dates=self.datetime_columns, orient='records')
-        return data
+        self.data = data
 
-    def convert_data(self, data, target_format=None, output_filename='converted_data'):
+        # Analyse data
+        self.identify_dataset()
+
+    def convert_data(self, target_format=None, output_filename='converted_data'):
         # Validate target format
         if target_format is None:
             raise ValueError('Target format not specified')
@@ -39,6 +43,56 @@ class Dataset:
 
         # Convert data
         if target_format == 'csv':
-            data.to_csv(output_filepath, index=False)
+            self.data.to_csv(output_filepath, index=False)
         elif target_format == 'json':
-            data.to_json(output_filepath, orient='records')
+            self.data.to_json(output_filepath, orient='records')
+
+    def identify_dataset(self):
+        # Initialisation
+        information = {'columns': []}
+        column_types = set()
+
+        # Identify dataset
+        for column in self.data.columns:
+            if self.data[column].dtype == 'object':
+                unique_values = self.data[column].unique()
+                max_str_length = max(len(str(value))
+                                     for value in unique_values)
+                column_info = {
+                    'column': column,
+                    'type': 'categorical' if max_str_length < 25 else 'text',
+                }
+                if max_str_length < 25:
+                    column_info['categories'] = unique_values.tolist()
+                information['columns'].append(column_info)
+                column_types.add(
+                    'categorical' if max_str_length < 25 else 'text')
+            elif self.data[column].dtype == 'datetime64[ns]':
+                information['columns'].append({
+                    'column': column,
+                    'type': 'time-series'
+                })
+                column_types.add('time-series')
+            else:
+                information['columns'].append({
+                    'column': column,
+                    'type': 'numerical',
+                    'min': self.data[column].min(),
+                    'max': self.data[column].max()
+                })
+                column_types.add('numerical')
+
+        # Determine the general type of the dataset
+        if 'time-series' in column_types:
+            information['type'] = 'time-series'
+        elif 'numerical' in column_types and len(column_types) == 1:
+            information['type'] = 'numerical'
+        elif 'categorical' in column_types and len(column_types) == 1:
+            information['type'] = 'categorical'
+        elif 'text' in column_types and len(column_types) == 1:
+            information['type'] = 'text'
+        else:
+            information['type'] = 'mixed'
+
+        # Store information
+        self.information = information
