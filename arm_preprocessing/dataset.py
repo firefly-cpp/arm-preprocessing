@@ -119,6 +119,12 @@ class Dataset:
         if len(columns) == 0:
             raise ValueError('Columns not specified')
 
+        # Validate column type
+        for column in columns:
+            for column_info in self.information['columns']:
+                if column_info['column'] == column and column_info['type'] != 'numerical':
+                    raise ValueError(f'Column {column} is not numerical')
+
         # Discretise data
         for column in columns:
             if method == 'equal_width':
