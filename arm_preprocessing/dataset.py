@@ -98,11 +98,12 @@ class Dataset:
         self.information = information
 
     def dataset_statistics(self):
-        print('Number of attributes: ', len(self.data.columns))
+        print(f'Number of attributes: {len(self.data.columns)}')
+        print(f'Dataset type: {self.information["type"]}')
 
         for column in self.information['columns']:
             if column['type'] == 'categorical':
-                print(f'{column["column"]}, : {column["categories"]}')
+                print(f'{column["column"]}: {column["categories"]}')
             if column['type'] == 'numerical':
                 print(
                     f'{column["column"]}: {column["min"]}-{column["max"]}')
