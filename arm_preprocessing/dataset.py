@@ -112,7 +112,7 @@ class Dataset:
 
     def discretise(self, method='equal_width', num_bins=10, columns=[]):
         # Validate method
-        if method not in ['equal_width']:
+        if method not in ['equal_width', 'equal_frequency']:
             raise ValueError(f'Invalid discretisation method: {method}')
 
         # Validate columns
@@ -124,3 +124,6 @@ class Dataset:
             if method == 'equal_width':
                 self.data[column] = pd.cut(
                     self.data[column], bins=num_bins, labels=None)
+            elif method == 'equal_frequency':
+                self.data[column] = pd.qcut(
+                    self.data[column], q=num_bins, labels=None)
