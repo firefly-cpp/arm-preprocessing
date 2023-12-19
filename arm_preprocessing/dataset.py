@@ -109,3 +109,18 @@ class Dataset:
                     f'{column["column"]}: {column["min"]}-{column["max"]}')
             if column['type'] == 'text':
                 print(f'{column["column"]}: long text')
+
+    def discretise(self, method='equal_width', num_bins=10, columns=[]):
+        # Validate method
+        if method not in ['equal_width']:
+            raise ValueError(f'Invalid discretisation method: {method}')
+
+        # Validate columns
+        if len(columns) == 0:
+            raise ValueError('Columns not specified')
+
+        # Discretise data
+        for column in columns:
+            if method == 'equal_width':
+                self.data[column] = pd.cut(
+                    self.data[column], bins=num_bins, labels=None)
