@@ -31,6 +31,25 @@ arm-preprocessing is a lightweight Python library supporting several key steps i
 
 -
 
+## Usage
+### Data loading
+The following example demonstrates how to load a dataset from a file (csv, json, txt). More examples can be found in the [examples](./examples) directory:
+- [Loading a dataset from a CSV file](./examples/load_dataset_csv.py)
+- [Loading a dataset from a JSON file](./examples/load_dataset_json.py)
+- [Loading a time-series dataset](./examples/load_dataset_timeseries.py)
+
+```python
+from arm_preprocessing.dataset import Dataset
+
+# Initialise dataset with filename (without format) and format (csv, json, txt)
+dataset = Dataset('path/to/datasets', format='csv')
+
+# Load dataset
+dataset.load_data()
+df = dataset.data
+```
+
+
 ## Related frameworks
 
 [1] [NiaARM: A minimalistic framework for Numerical Association Rule Mining](https://github.com/firefly-cpp/NiaARM) 
