@@ -104,3 +104,22 @@ def test_identify_dataset_categorical():
     dataset = Dataset('datasets/breast', format='csv')
     dataset.load_data()
     assert dataset.information['type'] == 'categorical'
+
+
+def test_discretise_equal_width():
+    # Test equal width discretisation
+    dataset = Dataset('datasets/sportydatagen', format='csv')
+    dataset.load_data()
+    dataset.discretise(method='equal_width', num_bins=5, columns=['calories'])
+    assert dataset.data['calories'].value_counts().shape[0] == 5
+    assert dataset.data['calories'].dtype == 'category'
+
+
+def test_discretise_equal_frequency():
+    # Test equal width discretisation
+    dataset = Dataset('datasets/measures2', format='txt')
+    dataset.load_data()
+    dataset.discretise(method='equal_frequency',
+                       num_bins=5, columns=['temperature'])
+    assert dataset.data['temperature'].value_counts().shape[0] == 5
+    assert dataset.data['temperature'].dtype == 'category'
