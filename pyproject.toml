@@ -7,9 +7,14 @@ authors = ["firefly-cpp <iztok@iztok-jr-fister.eu>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 pandas = "^1.5.0"
+Sphinx = {version = "^4.4.0", optional = true}
+sphinx-rtd-theme = {version = "^1.0.0", optional = true}
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
+
+[tool.poetry.extras]
+docs = ["Sphinx", "sphinx-rtd-theme", "sphinxcontrib-bibtex"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
