@@ -133,3 +133,17 @@ class Dataset:
             elif method == 'equal_frequency':
                 self.data[column] = pd.qcut(
                     self.data[column], q=num_bins, labels=None)
+
+    def filter_timeseries(self, start_date=None, end_date=None, datetime_column=None):
+        # Between two dates
+        if start_date is not None and end_date is not None:
+            if start_date > end_date:
+                raise ValueError(
+                    f'start_date ({start_date}) is greater than end_date ({end_date})')
+
+            if datetime_column is not None:
+                # Sort dataset based on time-series
+                df = self.data.sort_values(by=datetime_column)
+
+                # Filter dataset based on start date and end date
+                return df[(self.data[datetime_column] >= start_date) & (self.data[datetime_column] <= end_date)]
