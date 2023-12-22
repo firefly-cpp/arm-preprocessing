@@ -147,6 +147,8 @@ class Dataset:
                 # Filter dataset based on start date and end date
                 return df[(self.data[datetime_column] >= start_date) & (self.data[datetime_column] <= end_date)]
 
+        return self.data
+
     def filter_by_minute(self, minute=None, datetime_column=None):
         if minute is not None:
             if datetime_column is not None:
@@ -155,6 +157,8 @@ class Dataset:
 
                 # Filter dataset based on minute
                 return df[df[datetime_column].dt.minute == minute]
+
+        return self.data
 
     def filter_by_hour(self, hour=None, datetime_column=None):
         if hour is not None:
@@ -165,6 +169,8 @@ class Dataset:
                 # Filter dataset based on hour
                 return df[df[datetime_column].dt.hour == hour]
 
+        return self.data
+
     def filter_by_day(self, day=None, datetime_column=None):
         if day is not None:
             if datetime_column is not None:
@@ -173,6 +179,8 @@ class Dataset:
 
                 # Filter dataset based on day
                 return df[df[datetime_column].dt.day == day]
+
+        return self.data
 
     def filter_by_weekday(self, weekday=None, datetime_column=None):
         if weekday is not None:
@@ -183,6 +191,8 @@ class Dataset:
                 # Filter dataset based on weekday
                 return df[df[datetime_column].dt.weekday == weekday]
 
+        return self.data
+
     def filter_by_week(self, week=None, datetime_column=None):
         if week is not None:
             if datetime_column is not None:
@@ -191,6 +201,8 @@ class Dataset:
 
                 # Filter dataset based on week
                 return df[df[datetime_column].dt.isocalendar().week == week]
+
+        return self.data
 
     def filter_by_month(self, month=None, datetime_column=None):
         if month is not None:
@@ -201,6 +213,8 @@ class Dataset:
                 # Filter dataset based on month
                 return df[df[datetime_column].dt.month == month]
 
+        return self.data
+
     def filter_by_year(self, year=None, datetime_column=None):
         if year is not None:
             if datetime_column is not None:
@@ -209,3 +223,5 @@ class Dataset:
 
                 # Filter dataset based on year
                 return df[df[datetime_column].dt.year == year]
+
+        return self.data
