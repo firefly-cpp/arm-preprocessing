@@ -1,6 +1,7 @@
 import os
 import pytest
 import pandas as pd
+from datetime import datetime
 
 from arm_preprocessing import __version__
 from arm_preprocessing.dataset import Dataset
@@ -123,3 +124,185 @@ def test_discretise_equal_frequency():
                        num_bins=5, columns=['temperature'])
     assert dataset.data['temperature'].value_counts().shape[0] == 5
     assert dataset.data['temperature'].dtype == 'category'
+
+
+def test_filter_between_dates():
+    # Test filtering between dates
+    dataset = Dataset('datasets/measures2', format='txt',
+                      datetime_columns=['date', 'time'])
+    dataset.load()
+
+    # Filter between valid dates
+    start_date = datetime(2022, 1, 1)
+    end_date = datetime(2023, 1, 1)
+    df = dataset.filter_between_dates(
+        start_date, end_date, 'date_time')
+    assert len(df) == 38
+    assert df['date_time'].min() >= start_date
+    assert df['date_time'].max() <= end_date
+
+    # Raise ValueError for start_date > end_date
+    with pytest.raises(ValueError):
+        df = dataset.filter_between_dates(
+            start_date=end_date, end_date=start_date, datetime_column='date_time')
+
+    # No filtering when start_date and end_date are None
+    df = dataset.filter_between_dates()
+    assert df.equals(dataset.data)
+
+    # No filtering when datetime_column is None
+    df = dataset.filter_between_dates(start_date=start_date, end_date=end_date)
+    assert df.equals(dataset.data)
+
+
+def test_filter_by_minute():
+    # Test filtering by minute
+    dataset = Dataset('datasets/measures2', format='txt',
+                      datetime_columns=['date', 'time'])
+    dataset.load()
+
+    # Filter by valid minute
+    minute_to_filter = 40
+    df = dataset.filter_by_minute(minute=minute_to_filter,
+                                  datetime_column='date_time')
+    assert len(df) == 8
+    assert all(df['date_time'].dt.minute == minute_to_filter)
+
+    # No filtering when minute is None
+    df = dataset.filter_by_minute(datetime_column='date_time')
+    assert df.equals(dataset.data)
+
+    # No filtering when datetime_column is None
+    df = dataset.filter_by_minute(minute=minute_to_filter)
+    assert df.equals(dataset.data)
+
+
+def test_filter_by_hour():
+    # Test filtering by hour
+    dataset = Dataset('datasets/measures2', format='txt',
+                      datetime_columns=['date', 'time'])
+    dataset.load()
+
+    # Filter by valid hour
+    hour_to_filter = 16
+    df = dataset.filter_by_hour(
+        hour=hour_to_filter, datetime_column='date_time')
+    assert len(df) == 38
+    assert all(df['date_time'].dt.hour == hour_to_filter)
+
+    # No filtering when hour is None
+    dataset.filter_by_hour(datetime_column='date_time')
+    assert df.equals(dataset.data)
+
+    # No filtering when datetime_column is None
+    dataset.filter_by_hour(hour=hour_to_filter)
+    assert df.equals(dataset.data)
+
+
+def test_filter_by_day():
+    # Test filtering by day
+    dataset = Dataset('datasets/measures2', format='txt',
+                      datetime_columns=['date', 'time'])
+    dataset.load()
+
+    # Filter by valid day
+    day_to_filter = 14
+    df = dataset.filter_by_day(day=day_to_filter, datetime_column='date_time')
+    assert len(df) == 38
+    assert all(df['date_time'].dt.day == day_to_filter)
+
+    # No filtering when day is None
+    dataset.filter_by_day(datetime_column='date_time')
+    assert df.equals(dataset.data)
+
+    # No filtering when datetime_column is None
+    dataset.filter_by_day(day=day_to_filter)
+    assert df.equals(dataset.data)
+
+
+def test_filter_by_weekday():
+    # Test filtering by weekday
+    dataset = Dataset('datasets/measures2', format='txt',
+                      datetime_columns=['date', 'time'])
+    dataset.load()
+
+    # Filter by valid weekday (e.g., Monday, represented as 0)
+    weekday_to_filter = 2
+    df = dataset.filter_by_weekday(
+        weekday=weekday_to_filter, datetime_column='date_time')
+    assert len(df) == 38
+    assert all(df['date_time'].dt.weekday == weekday_to_filter)
+
+    # No filtering when weekday is None
+    dataset.filter_by_weekday(datetime_column='date_time')
+    assert df.equals(dataset.data)
+
+    # No filtering when datetime_column is None
+    dataset.filter_by_weekday(weekday=weekday_to_filter)
+    assert df.equals(dataset.data)
+
+
+def test_filter_by_week():
+    # Test filtering by week
+    dataset = Dataset('datasets/measures2', format='txt',
+                      datetime_columns=['date', 'time'])
+    dataset.load()
+
+    # Filter by valid week
+    week_to_filter = 37
+    df = dataset.filter_by_week(
+        week=week_to_filter, datetime_column='date_time')
+    assert len(df) == 38
+    assert all(df['date_time'].dt.isocalendar().week == week_to_filter)
+
+    # No filtering when week is None
+    dataset.filter_by_week(datetime_column='date_time')
+    assert df.equals(dataset.data)
+
+    # No filtering when datetime_column is None
+    dataset.filter_by_week(week=week_to_filter)
+    assert df.equals(dataset.data)
+
+
+def test_filter_by_month():
+    # Test filtering by month
+    dataset = Dataset('datasets/measures2', format='txt',
+                      datetime_columns=['date', 'time'])
+    dataset.load()
+
+    # Filter by valid month
+    month_to_filter = 9
+    df = dataset.filter_by_month(
+        month=month_to_filter, datetime_column='date_time')
+    assert len(df) == 38
+    assert all(df['date_time'].dt.month == month_to_filter)
+
+    # No filtering when month is None
+    dataset.filter_by_month(datetime_column='date_time')
+    assert df.equals(dataset.data)
+
+    # No filtering when datetime_column is None
+    dataset.filter_by_month(month=month_to_filter)
+    assert df.equals(dataset.data)
+
+
+def test_filter_by_year():
+    # Test filtering by year
+    dataset = Dataset('datasets/measures2', format='txt',
+                      datetime_columns=['date', 'time'])
+    dataset.load()
+
+    # Filter by valid year
+    year_to_filter = 2022
+    df = dataset.filter_by_year(
+        year=year_to_filter, datetime_column='date_time')
+    assert len(df) == 38
+    assert all(df['date_time'].dt.year == year_to_filter)
+
+    # No filtering when year is None
+    dataset.filter_by_year(datetime_column='date_time')
+    assert df.equals(dataset.data)
+
+    # No filtering when datetime_column is None
+    dataset.filter_by_year(year=year_to_filter)
+    assert df.equals(dataset.data)
