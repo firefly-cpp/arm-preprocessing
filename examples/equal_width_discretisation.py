@@ -9,7 +9,7 @@ from arm_preprocessing.dataset import Dataset
 dataset = Dataset('datasets/sportydatagen', format='csv')
 
 # Load dataset
-dataset.load_data()
+dataset.load()
 
 # Discretise dataset using equal width discretisation
 dataset.discretise(method='equal_width', num_bins=5, columns=['calories'])

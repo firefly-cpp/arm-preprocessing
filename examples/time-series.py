@@ -3,7 +3,7 @@ from arm_preprocessing.dataset import Dataset
 
 dataset = Dataset('datasets/measures2', format='txt',
                   datetime_columns=['date', 'time'])
-dataset.load_data()
+dataset.load()
 
 series = TimeSeries(dataset.data)
 

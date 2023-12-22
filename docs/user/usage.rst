@@ -16,7 +16,7 @@ The following examples demonstrate how to load a dataset from a file (csv, json,
     dataset = Dataset('datasets/breast', format='csv')
 
     # Load dataset
-    dataset.load_data()
+    dataset.load()
 
     # Print dataset information (columns, categories, min/max values, etc.)
     dataset.dataset_statistics()
@@ -29,7 +29,7 @@ The following examples demonstrate how to load a dataset from a file (csv, json,
     dataset = Dataset('datasets/artm_test_dataset', format='json')
 
     # Load dataset
-    dataset.load_data()
+    dataset.load()
 
     # Print dataset information (columns, categories, min/max values, etc.)
     dataset.dataset_statistics()
@@ -43,7 +43,7 @@ The following examples demonstrate how to load a dataset from a file (csv, json,
                     datetime_columns=['date', 'time'])
 
     # Load dataset
-    dataset.load_data()
+    dataset.load()
 
     # Print dataset information (columns, categories, min/max values, etc.)
     dataset.dataset_statistics()

@@ -10,7 +10,7 @@ dataset = Dataset('datasets/measures2', format='txt',
                   datetime_columns=['date', 'time'])
 
 # Load dataset
-dataset.load_data()
+dataset.load()
 
 # Discretise dataset using equal width discretisation
 dataset.discretise(method='equal_frequency',

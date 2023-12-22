@@ -14,7 +14,7 @@ class Dataset:
         self.datetime_columns = [datetime_columns]
         self.information = {}
 
-    def load_data(self):
+    def load(self):
         # Load data from file
         if self.format == 'csv' or self.format == 'txt':
             if len(self.datetime_columns[0]) == 0:
@@ -33,7 +33,7 @@ class Dataset:
         # Analyse data
         self.identify_dataset()
 
-    def convert_data(self, target_format=None, output_filename='converted_data'):
+    def convert(self, target_format=None, output_filename='converted_data'):
         # Validate target format
         if target_format is None:
             raise ValueError('Target format not specified')
@@ -134,8 +134,7 @@ class Dataset:
                 self.data[column] = pd.qcut(
                     self.data[column], q=num_bins, labels=None)
 
-    def filter_timeseries(self, start_date=None, end_date=None, datetime_column=None):
-        # Between two dates
+    def filter_between_dates(self, start_date=None, end_date=None, datetime_column=None):
         if start_date is not None and end_date is not None:
             if start_date > end_date:
                 raise ValueError(
@@ -147,3 +146,66 @@ class Dataset:
 
                 # Filter dataset based on start date and end date
                 return df[(self.data[datetime_column] >= start_date) & (self.data[datetime_column] <= end_date)]
+
+    def filter_by_minute(self, minute=None, datetime_column=None):
+        if minute is not None:
+            if datetime_column is not None:
+                # Sort dataset based on time-series
+                df = self.data.sort_values(by=datetime_column)
+
+                # Filter dataset based on minute
+                return df[df[datetime_column].dt.minute == minute]
+
+    def filter_by_hour(self, hour=None, datetime_column=None):
+        if hour is not None:
+            if datetime_column is not None:
+                # Sort dataset based on time-series
+                df = self.data.sort_values(by=datetime_column)
+
+                # Filter dataset based on hour
+                return df[df[datetime_column].dt.hour == hour]
+
+    def filter_by_day(self, day=None, datetime_column=None):
+        if day is not None:
+            if datetime_column is not None:
+                # Sort dataset based on time-series
+                df = self.data.sort_values(by=datetime_column)
+
+                # Filter dataset based on day
+                return df[df[datetime_column].dt.day == day]
+
+    def filter_by_weekday(self, weekday=None, datetime_column=None):
+        if weekday is not None:
+            if datetime_column is not None:
+                # Sort dataset based on time-series
+                df = self.data.sort_values(by=datetime_column)
+
+                # Filter dataset based on weekday
+                return df[df[datetime_column].dt.weekday == weekday]
+
+    def filter_by_week(self, week=None, datetime_column=None):
+        if week is not None:
+            if datetime_column is not None:
+                # Sort dataset based on time-series
+                df = self.data.sort_values(by=datetime_column)
+
+                # Filter dataset based on week
+                return df[df[datetime_column].dt.isocalendar().week == week]
+
+    def filter_by_month(self, month=None, datetime_column=None):
+        if month is not None:
+            if datetime_column is not None:
+                # Sort dataset based on time-series
+                df = self.data.sort_values(by=datetime_column)
+
+                # Filter dataset based on month
+                return df[df[datetime_column].dt.month == month]
+
+    def filter_by_year(self, year=None, datetime_column=None):
+        if year is not None:
+            if datetime_column is not None:
+                # Sort dataset based on time-series
+                df = self.data.sort_values(by=datetime_column)
+
+                # Filter dataset based on year
+                return df[df[datetime_column].dt.year == year]

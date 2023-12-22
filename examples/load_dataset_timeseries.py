@@ -10,7 +10,7 @@ dataset = Dataset('datasets/measures2', format='txt',
                   datetime_columns=['date', 'time'])
 
 # Load dataset
-dataset.load_data()
+dataset.load()
 
 # Print dataset information (columns, categories, min/max values, etc.)
 dataset.dataset_statistics()

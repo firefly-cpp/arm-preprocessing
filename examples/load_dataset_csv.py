@@ -9,7 +9,7 @@ from arm_preprocessing.dataset import Dataset
 dataset = Dataset('datasets/breast', format='csv')
 
 # Load dataset
-dataset.load_data()
+dataset.load()
 
 # Print dataset information (columns, categories, min/max values, etc.)
 dataset.dataset_statistics()
