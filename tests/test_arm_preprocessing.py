@@ -1,4 +1,5 @@
 import os
+import re
 import pytest
 import pandas as pd
 from datetime import datetime
@@ -124,6 +125,22 @@ def test_discretise_equal_frequency():
                        num_bins=5, columns=['temperature'])
     assert dataset.data['temperature'].value_counts().shape[0] == 5
     assert dataset.data['temperature'].dtype == 'category'
+
+def test_discretise_kmeans():
+    # Test k-means discretisation
+    dataset = Dataset('datasets/measures2', format='txt')
+    dataset.load()
+    dataset.discretise(method='kmeans', num_bins=5, columns=['temperature'])
+    assert dataset.data['temperature'].value_counts().shape[0] == 5
+    assert all(dataset.data['temperature'].str.match(re.compile(r'^Cluster \d+$')))
+    
+
+def test_discretise_invalid_method():
+    # Test invalid discretisation method
+    dataset = Dataset('datasets/measures2', format='txt')
+    dataset.load()
+    with pytest.raises(ValueError, match='Invalid discretisation method'):
+        dataset.discretise(method='invalid_method', num_bins=5, columns=['temperature'])
 
 
 def test_filter_between_dates():
