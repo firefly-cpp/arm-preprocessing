@@ -2,7 +2,25 @@ import pandas as pd
 
 
 class Dataset:
+    """
+    Represents a dataset with various functionalities for data manipulation and analysis.
+
+    Args:
+        filename (str): Name of the file without extension.
+        format (str, optional): Format of the dataset file ('csv', 'txt', 'json'). Default is 'csv'.
+        target_format (str, optional): Target format for conversion. Default is None.
+        datetime_columns (list, optional): List of columns containing datetime values. Default is an empty list.
+    """
     def __init__(self, filename, format='csv', target_format=None, datetime_columns=[]):
+        """
+        Initialise a Dataset instance.
+
+        Args:
+            filename (str): Name of the file without extension.
+            format (str, optional): Format of the dataset file ('csv', 'txt', 'json'). Default is 'csv'.
+            target_format (str, optional): Target format for conversion. Default is None.
+            datetime_columns (list, optional): List of columns containing datetime values. Default is an empty list.
+        """
         # Validate format
         if format not in ['csv', 'txt', 'json']:
             raise ValueError(f'Invalid format: {format}')
@@ -15,6 +33,15 @@ class Dataset:
         self.information = {}
 
     def load(self):
+        """
+        Load data from the specified file and analyse it.
+
+        Raises:
+            ValueError: Specified format is not supported.
+
+        Returns:
+            None
+        """
         # Load data from file
         if self.format == 'csv' or self.format == 'txt':
             if len(self.datetime_columns[0]) == 0:
@@ -34,6 +61,19 @@ class Dataset:
         self.identify_dataset()
 
     def convert(self, target_format=None, output_filename='converted_data'):
+        """
+        Convert the dataset to the specified target format.
+
+        Args:
+            target_format (str): Target format for conversion.
+            output_filename (str): Name of the output file without extension.
+
+        Raises:
+            ValueError: Target format is not specified.
+
+        Returns:
+            None
+        """
         # Validate target format
         if target_format is None:
             raise ValueError('Target format not specified')
@@ -48,6 +88,15 @@ class Dataset:
             self.data.to_json(output_filepath, orient='records')
 
     def identify_dataset(self):
+        """
+        Identify the type of the dataset and store the information.
+        
+        Raises:
+            ValueError: Dataset contains invalid column type.
+            
+        Returns:
+            None
+        """
         # Initialisation
         information = {'columns': []}
         column_types = set()
@@ -98,6 +147,12 @@ class Dataset:
         self.information = information
 
     def dataset_statistics(self):
+        """
+        Print dataset statistics.
+        
+        Returns:
+            None
+        """
         print(f'Number of attributes: {len(self.data.columns)}')
         print(f'Dataset type: {self.information["type"]}')
 
@@ -111,6 +166,22 @@ class Dataset:
                 print(f'{column["column"]}: long text')
 
     def discretise(self, method='equal_width', num_bins=10, columns=[]):
+        """
+        Discretise the dataset using the specified method.
+        
+        Args:
+            method (str): Discretisation method ('equal_width', 'equal_frequency').
+            num_bins (int): Number of bins.
+            columns (list): List of columns to discretise.
+            
+        Raises:
+            ValueError: Invalid discretisation method.
+            ValueError: Columns not specified.
+            ValueError: Column type is not numerical.
+        
+        Returns:
+            None
+        """
         # Validate method
         if method not in ['equal_width', 'equal_frequency']:
             raise ValueError(f'Invalid discretisation method: {method}')
@@ -135,10 +206,24 @@ class Dataset:
                     self.data[column], q=num_bins, labels=None)
 
     def filter_between_dates(self, start_date=None, end_date=None, datetime_column=None):
+        """
+        Filter the dataset based on the specified start date and end date.
+        
+        Args:
+            start_date (str): Start date.
+            end_date (str): End date.
+            datetime_column (str): Name of the column containing datetime values.
+        
+        Raises:
+            ValueError: Start date is greater than end date.
+        
+        Returns:
+            None
+        """
         if start_date is not None and end_date is not None:
             if start_date > end_date:
                 raise ValueError(
-                    f'start_date ({start_date}) is greater than end_date ({end_date})')
+                    f'Start date ({start_date}) is greater than end date ({end_date})')
 
             if datetime_column is not None:
                 # Sort dataset based on time-series
@@ -150,6 +235,16 @@ class Dataset:
         return self.data
 
     def filter_by_minute(self, minute=None, datetime_column=None):
+        """
+        Filter the dataset based on the specified minute.
+        
+        Args:
+            minute (int): Minute.
+            datetime_column (str): Name of the column containing datetime values.
+        
+        Returns:
+            None
+        """
         if minute is not None:
             if datetime_column is not None:
                 # Sort dataset based on time-series
@@ -161,6 +256,16 @@ class Dataset:
         return self.data
 
     def filter_by_hour(self, hour=None, datetime_column=None):
+        """
+        Filter the dataset based on the specified hour.
+        
+        Args:
+            hour (int): Hour.
+            datetime_column (str): Name of the column containing datetime values.
+        
+        Returns:
+            None
+        """
         if hour is not None:
             if datetime_column is not None:
                 # Sort dataset based on time-series
@@ -172,6 +277,16 @@ class Dataset:
         return self.data
 
     def filter_by_day(self, day=None, datetime_column=None):
+        """
+        Filter the dataset based on the specified day.
+        
+        Args:
+            day (int): Day.
+            datetime_column (str): Name of the column containing datetime values.
+        
+        Returns:
+            None
+        """
         if day is not None:
             if datetime_column is not None:
                 # Sort dataset based on time-series
@@ -183,6 +298,16 @@ class Dataset:
         return self.data
 
     def filter_by_weekday(self, weekday=None, datetime_column=None):
+        """
+        Filter the dataset based on the specified weekday.
+        
+        Args:
+            weekday (int): Weekday.
+            datetime_column (str): Name of the column containing datetime values.
+        
+        Returns:
+            None
+        """
         if weekday is not None:
             if datetime_column is not None:
                 # Sort dataset based on time-series
@@ -194,6 +319,16 @@ class Dataset:
         return self.data
 
     def filter_by_week(self, week=None, datetime_column=None):
+        """
+        Filter the dataset based on the specified week.
+        
+        Args:
+            week (int): Week.
+            datetime_column (str): Name of the column containing datetime values.
+        
+        Returns:
+            None
+        """
         if week is not None:
             if datetime_column is not None:
                 # Sort dataset based on time-series
@@ -205,6 +340,16 @@ class Dataset:
         return self.data
 
     def filter_by_month(self, month=None, datetime_column=None):
+        """
+        Filter the dataset based on the specified month.
+        
+        Args:
+            month (int): Month.
+            datetime_column (str): Name of the column containing datetime values.
+        
+        Returns:
+            None
+        """
         if month is not None:
             if datetime_column is not None:
                 # Sort dataset based on time-series
@@ -216,6 +361,16 @@ class Dataset:
         return self.data
 
     def filter_by_year(self, year=None, datetime_column=None):
+        """
+        Filter the dataset based on the specified year.
+        
+        Args:
+            year (int): Year.
+            datetime_column (str): Name of the column containing datetime values.
+        
+        Returns:
+            None
+        """
         if year is not None:
             if datetime_column is not None:
                 # Sort dataset based on time-series

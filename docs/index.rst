@@ -45,6 +45,7 @@ The documentation is organised into the following sections:
 
 *   :ref:`user`
 *   :ref:`dev`
+*   :ref:`arm_preprocessing`
 *   :ref:`about`
 
 ..  _user:
@@ -64,6 +65,14 @@ The documentation is organised into the following sections:
     dev/installation
     dev/testing
     dev/documentation
+
+..  _arm_preprocessing:
+
+..  toctree::
+    :maxdepth: 2
+    :caption: ARM Preprocessing
+
+    arm_preprocessing/index
 
 ..  _about:
 
