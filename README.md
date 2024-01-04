@@ -33,10 +33,10 @@ arm-preprocessing is a lightweight Python library supporting several key steps i
 
 ## Usage
 ### Data loading
-The following example demonstrates how to load a dataset from a file (csv, json, txt). More examples can be found in the [examples](./examples) directory:
-- [Loading a dataset from a CSV file](./examples/load_dataset_csv.py)
-- [Loading a dataset from a JSON file](./examples/load_dataset_json.py)
-- [Loading a time-series dataset](./examples/load_dataset_timeseries.py)
+The following example demonstrates how to load a dataset from a file (csv, json, txt). More examples can be found in the [examples/data_loading](./examples/data_loading/) directory:
+- [Loading a dataset from a CSV file](./examples/data_loading/load_dataset_csv.py)
+- [Loading a dataset from a JSON file](./examples/data_loading/load_dataset_json.py)
+- [Loading a time-series dataset](./examples/data_loading/load_dataset_timeseries.py)
 
 ```python
 from arm_preprocessing.dataset import Dataset
@@ -49,6 +49,22 @@ dataset.load_data()
 df = dataset.data
 ```
 
+### Data discretisation
+The following example demonstrates how to discretise a dataset using the equal width method. More examples can be found in the [examples/discretisation](./examples/discretisation) directory:
+- [Discretising a dataset using the equal width method](./examples/discretisation/equal_width_discretisation.py)
+- [Discretising a dataset using the equal frequency method](./examples/discretisation/equal_frequency_discretisation.py)
+- [Discretising a dataset using k-means clustering](./examples/discretisation/kmeans_discretisation.py)
+
+```python
+from arm_preprocessing.dataset import Dataset
+
+# Initialise dataset with filename (without format) and format (csv, json, txt)
+dataset = Dataset('datasets/sportydatagen', format='csv')
+dataset.load_data()
+
+# Discretise dataset using equal width discretisation
+dataset.discretise(method='equal_width', num_bins=5, columns=['calories'])
+```
 
 ## Related frameworks
 
