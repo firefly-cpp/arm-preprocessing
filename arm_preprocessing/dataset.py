@@ -1,4 +1,6 @@
 import pandas as pd
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
 
 
 class Dataset:
@@ -170,7 +172,7 @@ class Dataset:
         Discretise the dataset using the specified method.
         
         Args:
-            method (str): Discretisation method ('equal_width', 'equal_frequency').
+            method (str): Discretisation method ('equal_width', 'equal_frequency', 'kmeans').
             num_bins (int): Number of bins.
             columns (list): List of columns to discretise.
             
@@ -183,7 +185,7 @@ class Dataset:
             None
         """
         # Validate method
-        if method not in ['equal_width', 'equal_frequency']:
+        if method not in ['equal_width', 'equal_frequency', 'kmeans']:
             raise ValueError(f'Invalid discretisation method: {method}')
 
         # Validate columns
@@ -204,6 +206,19 @@ class Dataset:
             elif method == 'equal_frequency':
                 self.data[column] = pd.qcut(
                     self.data[column], q=num_bins, labels=None)
+            elif method == 'kmeans':
+                # Standardise data
+                scaler = StandardScaler()
+                self.data[column] = scaler.fit_transform(
+                    self.data[column].values.reshape(-1, 1))
+
+                # Perform k-means clustering
+                kmeans = KMeans(n_clusters=num_bins, n_init='auto')
+                kmeans.fit(self.data[column].values.reshape(-1, 1))
+
+                # Assign cluster labels
+                labels = [f'Cluster {label}' for label in kmeans.labels_]
+                self.data[column] = labels
 
     def filter_between_dates(self, start_date=None, end_date=None, datetime_column=None):
         """
