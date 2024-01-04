@@ -4,32 +4,13 @@ arm-preprocessing is a lightweight Python library supporting several key steps i
 
 ## Key features
 
-### Dataset processing
-
 - Loading various formats of datasets (CSV, JSON, TXT)
 - Converting datasets in different formats
 - Loading different types of datasets (numerical dataset, discrete dataset, time-series data, text)
 - Dataset identification (which type of dataset)
 - Dataset statistics
-
-### Dataset manipulation
-
-- Support for dealing with missing data in ARM datasets
-- Data squashing algorithms Implementation
--
-
-### Time-series dataset support operations
-
-- Converting time attributes
--
-
-### Association rule text mining
-
-### Dataset visualization
-
-### Other
-
--
+- Discretization methods
+- Data squashing methods
 
 ## Usage
 ### Data loading
