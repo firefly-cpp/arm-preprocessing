@@ -2,7 +2,11 @@
 name = "arm-preprocessing"
 version = "0.1.0"
 description = "Implementation of several preprocessing techniques for Association Rule Mining (ARM)"
-authors = ["firefly-cpp <iztok@iztok-jr-fister.eu>"]
+authors = ["Tadej Lahovnik <lahovnik.tadej@gmail.com>", "Iztok Fister Jr. <iztok@iztok-jr-fister.eu>"]
+keywords = ['association rule mining', 'data science', 'preprocessing']
+homepage = "https://github.com/firefly-cpp/arm-preprocessing"
+repository = "https://github.com/firefly-cpp/arm-preprocessing"
+readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.9"
