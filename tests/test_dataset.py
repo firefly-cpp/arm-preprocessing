@@ -102,6 +102,38 @@ def test_identify_dataset_categorical():
     assert dataset.information['type'] == 'categorical'
 
 
+def test_missing_values_impute():
+    # Test imputing missing values
+    dataset = Dataset('examples/missing_values/data', format='csv')
+    dataset.load()
+    dataset.missing_values(method='impute')
+    assert dataset.data.isnull().sum().sum() == 0
+
+
+def test_missing_values_columns():
+    # Test removing columns with missing values
+    dataset = Dataset('examples/missing_values/data', format='csv')
+    dataset.load()
+    dataset.missing_values(method='column')
+    assert dataset.data.isnull().sum().sum() == 0
+
+
+def test_missing_values_rows():
+    # Test removing rows with missing values
+    dataset = Dataset('examples/missing_values/data', format='csv')
+    dataset.load()
+    dataset.missing_values(method='row')
+    assert dataset.data.isnull().sum().sum() == 0
+
+
+def test_missing_values_invalid_method():
+    # Test invalid method handling
+    dataset = Dataset('examples/missing_values/data', format='csv')
+    dataset.load()
+    with pytest.raises(ValueError, match='Invalid method'):
+        dataset.missing_values(method='invalid_method')
+
+
 def test_filter_between_dates():
     # Test filtering between dates
     dataset = Dataset(
