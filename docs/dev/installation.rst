@@ -14,7 +14,7 @@ After installing Poetry and cloning the project from GitHub, execute the followi
 
 .. code:: sh
 
-    $ poetry install
+    poetry install
 
 All of the project's dependencies should be installed and the project should be ready for further development. Note that Poetry creates a separate virtual environment for the project.
 
@@ -31,4 +31,16 @@ List of arm-preprocessing's dependencies:
 | sphinx               | ^4.4.0               |
 +----------------------+----------------------+
 | sphinx-rtd-theme     | ^1.0.0               |
++----------------------+----------------------+
+| scikit/learn         | ^1.3.2               |
++----------------------+----------------------+
+| niaarm               | ^0.3.5               |
++----------------------+----------------------+
+
+List of arm-preprocessing's development dependencies:
+
++----------------------+----------------------+
+| Package              | Version              |
++======================+======================+
+| pytest               | ^5.2                 |
 +----------------------+----------------------+

@@ -9,4 +9,4 @@ To check if all tests pass locally, run the following command:
 
 .. code:: sh
 
-    $ poetry run pytest
+    poetry run pytest

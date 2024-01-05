@@ -5,3 +5,4 @@ arm-preprocessing
 
     dataset
     discretisation
+    squashing
