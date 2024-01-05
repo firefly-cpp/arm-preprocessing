@@ -1,18 +1,38 @@
-# About
+# arm-preprocessing
+![PyPI Version](https://img.shields.io/pypi/v/arm-preprocessing.svg)
+[![arm-preprocessing](https://github.com/firefly-cpp/arm-preprocessing/actions/workflows/test.yml/badge.svg)](https://github.com/firefly-cpp/arm-preprocessing/actions/workflows/test.yml)
+[![Documentation Status](https://readthedocs.org/projects/arm-preprocessing/badge/?version=latest)](https://arm-preprocessing.readthedocs.io/en/latest/?badge=latest)
+![Repository size](https://img.shields.io/github/repo-size/firefly-cpp/arm-preprocessing)
+![License](https://img.shields.io/github/license/firefly-cpp/arm-preprocessing.svg)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/w/firefly-cpp/arm-preprocessing.svg)
+![Open issues](https://isitmaintained.com/badge/open/firefly-cpp/arm-preprocessing.svg)
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/firefly-cpp/arm-preprocessing.svg)](http://isitmaintained.com/project/firefly-cpp/arm-preprocessing "Average time to resolve an issue")
 
-arm-preprocessing is a lightweight Python library supporting several key steps involving data preparation, manipulation, and discretization for Association Rule Mining (ARM). The design of this framework has a minimalistic design outlook in mind and is intended to be fully extensible and allow easy integration with other related ARM libraries, e.g., NiaARM.
+* **Free software:** MIT license
+* **Documentation**: [http://arm-preprocessing.readthedocs.io](http://arm-preprocessing.readthedocs.io)
+* **Python**: 3.9.x, 3.10.x, 3.11.x
+* **Operating systems**: Windows, Ubuntu, macOS
 
-## Key features
+## About 📋
+arm-preprocessing is a lightweight Python library supporting several key steps involving data preparation, manipulation, and discretisation for Association Rule Mining (ARM). 🧠 Embrace its minimalistic design that prioritises simplicity. 💡 The framework is intended to be fully extensible and offers seamless integration with related ARM libraries (e.g., NiaARM). 🔗
 
-- Loading various formats of datasets (CSV, JSON, TXT)
-- Converting datasets to different formats
-- Loading different types of datasets (numerical dataset, discrete dataset, time-series data, text)
-- Dataset identification (which type of dataset)
-- Dataset statistics
-- Discretisation methods
-- Data squashing methods
+## Key features ✨
+- Loading various formats of datasets (CSV, JSON, TXT) 📊
+- Converting datasets to different formats 🔄
+- Loading different types of datasets (numerical dataset, discrete dataset, time-series data, text, etc.) 📉
+- Dataset identification (which type of dataset) 🔍
+- Dataset statistics 📈
+- Discretisation methods 📏
+- Data squashing methods 🤏
 
-## Usage
+## Installation 📦
+### pip
+To install ``arm-preprocessing`` with pip, use:
+```bash
+pip install arm-preprocessing
+```
+
+## Usage 🚀
 ### Data loading
 The following example demonstrates how to load a dataset from a file (csv, json, txt). More examples can be found in the [examples/data_loading](./examples/data_loading/) directory:
 - [Loading a dataset from a CSV file](./examples/data_loading/load_dataset_csv.py)
@@ -80,11 +100,11 @@ dataset.load()
 dataset.missing_values(method='impute')
 ```
 
-## Related frameworks
+## Related frameworks 🔗
 
 [1] [NiaARM: A minimalistic framework for Numerical Association Rule Mining](https://github.com/firefly-cpp/NiaARM) 
 
-## References
+## References 📚
 
 [1] I. Fister, I. Fister Jr., D. Novak and D. Verber, [Data squashing as preprocessing in association rule mining](https://iztok-jr-fister.eu/static/publications/300.pdf), 2022 IEEE Symposium Series on Computational Intelligence (SSCI), Singapore, Singapore, 2022, pp. 1720-1725, doi: 10.1109/SSCI51031.2022.10022240.
 

@@ -1,3 +1,15 @@
+User documentation
+------------------
+
+Installation
+============
+
+To install ``arm-preprocessing`` with pip, use:
+
+..  code:: bash
+
+    pip install arm-preprocessing
+
 Usage
 =====
 
@@ -11,7 +23,7 @@ This section demonstrates the usage of the arm-preprocessing framework.
 .. _data loading:
 
 Data loading
-------------
+~~~~~~~~~~~~
 
 The following examples demonstrate how to load a dataset from a file (csv, json, txt).
 
@@ -58,7 +70,7 @@ The following examples demonstrate how to load a dataset from a file (csv, json,
 ..  _data discretisation:
 
 Data discretisation
--------------------
+~~~~~~~~~~~~~~~~~~~
 
 The following examples demonstrate how to discretise a dataset.
 
@@ -108,7 +120,7 @@ The following examples demonstrate how to discretise a dataset.
 ..  _data squashing:
 
 Data squashing
---------------
+~~~~~~~~~~~~~~
 
 The following examples demonstrate how to squash a dataset.
 
@@ -144,7 +156,7 @@ The following examples demonstrate how to squash a dataset.
 ..  _missing values:
 
 Missing values
---------------
+~~~~~~~~~~~~~~
 
 The following examples demonstrate how to handle missing values in a dataset.
 
