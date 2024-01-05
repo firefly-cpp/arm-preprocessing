@@ -5,11 +5,11 @@ arm-preprocessing is a lightweight Python library supporting several key steps i
 ## Key features
 
 - Loading various formats of datasets (CSV, JSON, TXT)
-- Converting datasets in different formats
+- Converting datasets to different formats
 - Loading different types of datasets (numerical dataset, discrete dataset, time-series data, text)
 - Dataset identification (which type of dataset)
 - Dataset statistics
-- Discretization methods
+- Discretisation methods
 - Data squashing methods
 
 ## Usage
@@ -45,6 +45,24 @@ dataset.load_data()
 
 # Discretise dataset using equal width discretisation
 dataset.discretise(method='equal_width', num_bins=5, columns=['calories'])
+```
+
+### Data squashing
+The following example demonstrates how to squash a dataset using the euclidean similarity. More examples can be found in the [examples/squashing](./examples/squashing) directory:
+- [Squashing a dataset using the euclidean similarity](./examples/squashing/squash_euclidean.py)
+- [Squashing a dataset using the cosine similarity](./examples/squashing/squash_cosine.py)
+
+```python
+from arm_preprocessing.dataset import Dataset
+
+# Initialise dataset with filename and format
+dataset = Dataset('datasets/breast', format='csv')
+
+# Load dataset
+dataset.load()
+
+# Squash dataset
+dataset.squash(threshold=0.75, similarity='euclidean')
 ```
 
 ## Related frameworks
