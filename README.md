@@ -57,12 +57,27 @@ from arm_preprocessing.dataset import Dataset
 
 # Initialise dataset with filename and format
 dataset = Dataset('datasets/breast', format='csv')
-
-# Load dataset
 dataset.load()
 
 # Squash dataset
 dataset.squash(threshold=0.75, similarity='euclidean')
+```
+
+### Missing values
+The following example demonstrates how to handle missing values in a dataset using imputation. More examples can be found in the [examples/missing_values](./examples/missing_values) directory:
+- [Handling missing values in a dataset using row deletion](./examples/missing_values/missing_values_rows.py)
+- [Handling missing values in a dataset using column deletion](./examples/missing_values/missing_values_columns.py)
+- [Handling missing values in a dataset using imputation](./examples/missing_values/missing_values_impute.py)
+
+```python
+from arm_preprocessing.dataset import Dataset
+
+# Initialise dataset with filename and format
+dataset = Dataset('examples/missing_values/data', format='csv')
+dataset.load()
+
+# Impute missing data
+dataset.missing_values(method='impute')
 ```
 
 ## Related frameworks

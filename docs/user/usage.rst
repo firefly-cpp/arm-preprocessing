@@ -6,6 +6,7 @@ This section demonstrates the usage of the arm-preprocessing framework.
 *   :ref:`data loading`
 *   :ref:`data discretisation`
 *   :ref:`data squashing`
+*   :ref:`missing values`
 
 .. _data loading:
 
@@ -139,3 +140,49 @@ The following examples demonstrate how to squash a dataset.
 
     # Squash dataset
     dataset.squash(threshold=0.99, similarity='cosine')
+
+..  _missing values:
+
+Missing values
+--------------
+
+The following examples demonstrate how to handle missing values in a dataset.
+
+..  code:: python
+
+    from arm_preprocessing.dataset import Dataset
+
+    # Initialise dataset with filename and format
+    dataset = Dataset('examples/missing_values/data', format='csv')
+
+    # Load dataset
+    dataset.load()
+
+    # Remove columns with missing data
+    dataset.missing_values(method='column')
+
+..  code:: python
+
+    from arm_preprocessing.dataset import Dataset
+
+    # Initialise dataset with filename and format
+    dataset = Dataset('examples/missing_values/data', format='csv')
+
+    # Load dataset
+    dataset.load()
+
+    # Remove rows with missing data
+    dataset.missing_values(method='row')
+
+..  code:: python
+
+    from arm_preprocessing.dataset import Dataset
+
+    # Initialise dataset with filename and format
+    dataset = Dataset('examples/missing_values/data', format='csv')
+
+    # Load dataset
+    dataset.load()
+
+    # Impute missing data
+    dataset.missing_values(method='impute')
