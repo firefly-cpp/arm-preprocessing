@@ -176,6 +176,40 @@ class Dataset:
             if column['type'] == 'text':
                 print(f'{column["column"]}: long text')
 
+    def missing_values(self, method):
+        """
+        Handle missing values using the specified method.
+
+        Args:
+            method (str): Method for handling missing values ('row', 'column', 'impute').
+
+        Raises:
+            ValueError: Invalid method.
+
+        Returns:
+            None
+        """
+        # Validate method
+        if method not in ['row', 'column', 'impute']:
+            raise ValueError(f'Invalid method: {method}')
+
+        # Handle missing values
+        if method == 'column':
+            self.data.dropna(axis=1, inplace=True)
+        elif method == 'row':
+            self.data.dropna(axis=0, inplace=True)
+        elif method == 'impute':
+            for column in self.data.columns:
+                if self.data[column].dtype == 'object':
+                    self.data[column].fillna(
+                        self.data[column].mode()[0], inplace=True)
+                elif self.data[column].dtype == 'datetime64[ns]':
+                    self.data[column].fillna(
+                        self.data[column].mode()[0], inplace=True)
+                else:
+                    self.data[column].fillna(
+                        self.data[column].mean(), inplace=True)
+
     def discretise(self, method, num_bins, columns):
         """
         Discretise the dataset using the specified method.
