@@ -1,5 +1,6 @@
 import pandas as pd
 from arm_preprocessing.discretisation import Discretisation
+from arm_preprocessing.squashing import Squash
 
 
 class Dataset:
@@ -32,11 +33,11 @@ class Dataset:
             datetime_columns (list, optional): List of columns containing datetime values. Default is an empty list.
         """
         # Validate format
-        if format not in ["csv", "txt", "json"]:
-            raise ValueError(f"Invalid format: {format}")
+        if format not in ['csv', 'txt', 'json']:
+            raise ValueError(f'Invalid format: {format}')
 
         # Initialise attributes
-        self.filename = f"{filename}.{format}"
+        self.filename = f'{filename}.{format}'
         self.format = format
         self.target_format = target_format
         self.datetime_columns = [datetime_columns]
@@ -53,17 +54,18 @@ class Dataset:
             None
         """
         # Load data from file
-        if self.format == "csv" or self.format == "txt":
+        if self.format == 'csv' or self.format == 'txt':
             if len(self.datetime_columns[0]) == 0:
                 data = pd.read_csv(self.filename)
             else:
-                data = pd.read_csv(self.filename, parse_dates=self.datetime_columns)
-        elif self.format == "json":
+                data = pd.read_csv(
+                    self.filename, parse_dates=self.datetime_columns)
+        elif self.format == 'json':
             if len(self.datetime_columns[0]) == 0:
-                data = pd.read_json(self.filename, orient="records")
+                data = pd.read_json(self.filename, orient='records')
             else:
                 data = pd.read_json(
-                    self.filename, parse_dates=self.datetime_columns, orient="records"
+                    self.filename, parse_dates=self.datetime_columns, orient='records'
                 )
         self.data = data
 
@@ -86,16 +88,16 @@ class Dataset:
         """
         # Validate target format
         if target_format is None:
-            raise ValueError("Target format not specified")
+            raise ValueError('Target format not specified')
 
         # Prepare output filepath
-        output_filepath = f"{output_filename}.{target_format}"
+        output_filepath = f'{output_filename}.{target_format}'
 
         # Convert data
-        if target_format == "csv":
+        if target_format == 'csv':
             self.data.to_csv(output_filepath, index=False)
-        elif target_format == "json":
-            self.data.to_json(output_filepath, orient="records")
+        elif target_format == 'json':
+            self.data.to_json(output_filepath, orient='records')
 
     def identify_dataset(self):
         """
@@ -108,47 +110,50 @@ class Dataset:
             None
         """
         # Initialisation
-        information = {"columns": []}
+        information = {'columns': []}
         column_types = set()
 
         # Identify dataset
         for column in self.data.columns:
-            if self.data[column].dtype == "object":
+            if self.data[column].dtype == 'object':
                 unique_values = self.data[column].unique()
-                max_str_length = max(len(str(value)) for value in unique_values)
+                max_str_length = max(len(str(value))
+                                     for value in unique_values)
                 column_info = {
-                    "column": column,
-                    "type": "categorical" if max_str_length < 25 else "text",
+                    'column': column,
+                    'type': 'categorical' if max_str_length < 25 else 'text',
                 }
                 if max_str_length < 25:
-                    column_info["categories"] = unique_values.tolist()
-                information["columns"].append(column_info)
-                column_types.add("categorical" if max_str_length < 25 else "text")
-            elif self.data[column].dtype == "datetime64[ns]":
-                information["columns"].append({"column": column, "type": "time-series"})
-                column_types.add("time-series")
+                    column_info['categories'] = unique_values.tolist()
+                information['columns'].append(column_info)
+                column_types.add(
+                    'categorical' if max_str_length < 25 else 'text')
+            elif self.data[column].dtype == 'datetime64[ns]':
+                information['columns'].append(
+                    {'column': column, 'type': 'time-series'})
+                column_types.add('time-series')
             else:
-                information["columns"].append(
+                information['columns'].append(
                     {
-                        "column": column,
-                        "type": "numerical",
-                        "min": self.data[column].min(),
-                        "max": self.data[column].max(),
+                        'column': column,
+                        'type': 'numerical',
+                        'min': self.data[column].min(),
+                        'max': self.data[column].max(),
                     }
                 )
-                column_types.add("numerical")
+                column_types.add('numerical')
 
         # Determine the general type of the dataset
-        if "time-series" in column_types:
-            information["type"] = "time-series"
-        elif "numerical" in column_types and len(column_types) == 1:
-            information["type"] = "numerical"
-        elif "categorical" in column_types and len(column_types) == 1:
-            information["type"] = "categorical"
-        elif "text" in column_types and len(column_types) == 1:
-            information["type"] = "text"
+        if 'time-series' in column_types:
+            information['type'] = 'time-series'
+        elif 'numerical' in column_types and len(column_types) == 1:
+            information['type'] = 'numerical'
+        elif 'categorical' in column_types and len(column_types) == 1:
+            information['type'] = 'categorical'
+        elif 'text' in column_types and len(column_types) == 1:
+            information['type'] = 'text'
         else:
-            information["type"] = "mixed"
+            information['type'] = 'mixed'
 
         # Store information
         self.information = information
@@ -160,15 +165,15 @@ class Dataset:
         Returns:
             None
         """
-        print(f"Number of attributes: {len(self.data.columns)}")
+        print(f'Number of attributes: {len(self.data.columns)}')
         print(f'Dataset type: {self.information["type"]}')
 
         for column in self.information["columns"]:
-            if column["type"] == "categorical":
+            if column['type'] == 'categorical':
                 print(f'{column["column"]}: {column["categories"]}')
-            if column["type"] == "numerical":
+            if column['type'] == 'numerical':
                 print(f'{column["column"]}: {column["min"]}-{column["max"]}')
-            if column["type"] == "text":
+            if column['type'] == 'text':
                 print(f'{column["column"]}: long text')
 
     def discretise(self, method, num_bins, columns):
@@ -180,6 +185,15 @@ class Dataset:
             method (str): Discretisation method ('equal_width', 'equal_frequency', 'kmeans').
             num_bins (int): Number of bins.
             columns (list): List of columns to discretise.
+
+        Raises:
+            ValueError: Invalid data type.
+            ValueError: Invalid discretisation method.
+            ValueError: Columns not specified.
+            ValueError: Column type is not numerical.
+
+        Returns:
+            None
         """
         Discretisation.discretise(
             data=self.data,
@@ -188,6 +202,27 @@ class Dataset:
             columns=columns,
             information=self.information,
         )
+
+    def squash(self, threshold, similarity="euclidean"):
+        """
+        Squash the dataset using the specified threshold and similarity.
+
+        Args:
+            threshold (float): Threshold.
+            similarity (str): Similarity measure ('euclidean', 'cosine').
+
+        Raises:
+            ValueError: Invalid similarity measure.
+
+        Returns:
+            None
+        """
+        # Validate similarity
+        if similarity not in ['euclidean', 'cosine']:
+            raise ValueError(f'Invalid similarity measure: {similarity}')
+
+        # Squash data
+        self.data = Squash.squash(self.data, threshold, similarity)
 
     def filter_between_dates(
         self, start_date=None, end_date=None, datetime_column=None
@@ -209,7 +244,7 @@ class Dataset:
         if start_date is not None and end_date is not None:
             if start_date > end_date:
                 raise ValueError(
-                    f"Start date ({start_date}) is greater than end date ({end_date})"
+                    f'Start date ({start_date}) is greater than end date ({end_date})'
                 )
 
             if datetime_column is not None:
