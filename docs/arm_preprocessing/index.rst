@@ -1,6 +1,7 @@
-ARM Preprocessing
+arm-preprocessing
 =================
 
 ..  toctree::
 
     dataset
+    discretisation
