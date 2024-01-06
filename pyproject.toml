@@ -6,6 +6,7 @@ authors = ["Tadej Lahovnik <lahovnik.tadej@gmail.com>", "Iztok Fister Jr. <iztok
 keywords = ['association rule mining', 'data science', 'preprocessing']
 homepage = "https://github.com/firefly-cpp/arm-preprocessing"
 repository = "https://github.com/firefly-cpp/arm-preprocessing"
+documentatation = "http://arm-preprocessing.readthedocs.io"
 readme = "README.md"
 
 [tool.poetry.dependencies]
