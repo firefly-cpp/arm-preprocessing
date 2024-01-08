@@ -10,7 +10,7 @@
 
 * **Free software:** MIT license
 * **Documentation**: [http://arm-preprocessing.readthedocs.io](http://arm-preprocessing.readthedocs.io)
-* **Python**: 3.9.x, 3.10.x, 3.11.x
+* **Python**: 3.9.x, 3.10.x, 3.11.x, 3.12x
 * **Operating systems**: Windows, Ubuntu, macOS
 
 ## About 📋
