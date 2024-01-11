@@ -11,7 +11,7 @@
 * **Free software:** MIT license
 * **Documentation**: [http://arm-preprocessing.readthedocs.io](http://arm-preprocessing.readthedocs.io)
 * **Python**: 3.9.x, 3.10.x, 3.11.x, 3.12x
-* **Operating systems**: Windows, Ubuntu, macOS
+* **Tested OS:** Windows, Ubuntu, Fedora, Alpine, Arch, macOS. **However, that does not mean it does not work on others**
 
 ## About 📋
 arm-preprocessing is a lightweight Python library supporting several key steps involving data preparation, manipulation, and discretisation for Association Rule Mining (ARM). 🧠 Embrace its minimalistic design that prioritises simplicity. 💡 The framework is intended to be fully extensible and offers seamless integration with related ARM libraries (e.g., NiaARM). 🔗
