@@ -16,6 +16,9 @@
 ## About 📋
 arm-preprocessing is a lightweight Python library supporting several key steps involving data preparation, manipulation, and discretisation for Association Rule Mining (ARM). 🧠 Embrace its minimalistic design that prioritises simplicity. 💡 The framework is intended to be fully extensible and offers seamless integration with related ARM libraries (e.g., [NiaARM](https://github.com/firefly-cpp/NiaARM)). 🔗
 
+## Why arm-preprocessing?
+While numerous libraries facilitate data mining preprocessing tasks, this library is designed to integrate seamlessly with association rule mining. It harmonizes well with the NiaARM library, a robust numerical association rule mining framework. The primary aim is to bridge the gap between preprocessing and rule mining, simplifying the workflow/pipeline. Additionally, its design allows for the effortless incorporation of new preprocessing methods and fast benchmarking.
+
 ## Key features ✨
 - Loading various formats of datasets (CSV, JSON, TXT) 📊
 - Converting datasets to different formats 🔄
