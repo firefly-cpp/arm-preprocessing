@@ -3,6 +3,7 @@
 [![arm-preprocessing](https://github.com/firefly-cpp/arm-preprocessing/actions/workflows/test.yml/badge.svg)](https://github.com/firefly-cpp/arm-preprocessing/actions/workflows/test.yml)
 [![Documentation Status](https://readthedocs.org/projects/arm-preprocessing/badge/?version=latest)](https://arm-preprocessing.readthedocs.io/en/latest/?badge=latest)
 ![Repository size](https://img.shields.io/github/repo-size/firefly-cpp/arm-preprocessing)
+[![Downloads](https://static.pepy.tech/badge/arm-preprocessing)](https://pepy.tech/project/arm-preprocessing)
 ![License](https://img.shields.io/github/license/firefly-cpp/arm-preprocessing.svg)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/firefly-cpp/arm-preprocessing.svg)
 ![Open issues](https://isitmaintained.com/badge/open/firefly-cpp/arm-preprocessing.svg)
