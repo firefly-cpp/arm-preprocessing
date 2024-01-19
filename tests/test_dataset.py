@@ -134,6 +134,40 @@ def test_missing_values_invalid_method():
         dataset.missing_values(method='invalid_method')
 
 
+def test_feature_scaling_normalisation():
+    # Test feature scaling using normalisation
+    dataset = Dataset('datasets/Abalone', format='csv')
+    dataset.load()
+    dataset.scale(method='normalisation')
+    for column in dataset.data.columns:
+        # Skip non-numerical columns
+        if dataset.data[column].dtype in ['datetime64[ns]', 'object']:
+            continue
+        assert dataset.data[column].min() >= 0
+        assert dataset.data[column].max() <= 1
+
+
+def test_feature_scaling_standardisation():
+    # Test feature scaling using standardisation
+    dataset = Dataset('datasets/Abalone', format='csv')
+    dataset.load()
+    dataset.scale(method='standardisation')
+    for column in dataset.data.columns:
+        # Skip non-numerical columns
+        if dataset.data[column].dtype in ['datetime64[ns]', 'object']:
+            continue
+        assert dataset.data[column].mean() == pytest.approx(0, abs=0.01)
+        assert dataset.data[column].std() == pytest.approx(1, abs=0.01)
+
+
+def test_feature_scaling_invalid_method():
+    # Test invalid method handling
+    dataset = Dataset('datasets/Abalone', format='csv')
+    dataset.load()
+    with pytest.raises(ValueError, match='Invalid scaling method'):
+        dataset.scale(method='invalid_method')
+
+
 def test_filter_between_dates():
     # Test filtering between dates
     dataset = Dataset(
