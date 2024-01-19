@@ -1,6 +1,3 @@
-User documentation
-------------------
-
 Installation
 ============
 
@@ -16,9 +13,10 @@ Usage
 This section demonstrates the usage of the arm-preprocessing framework.
 
 *   :ref:`data loading`
+*   :ref:`missing values`
 *   :ref:`data discretisation`
 *   :ref:`data squashing`
-*   :ref:`missing values`
+*   :ref:`feature scaling`
 
 .. _data loading:
 
@@ -66,6 +64,54 @@ The following examples demonstrate how to load a dataset from a file (csv, json,
 
     # Print dataset information (columns, categories, min/max values, etc.)
     dataset.dataset_statistics()
+
+    ..  _missing values:
+
+.. _missing values:
+
+Missing values
+~~~~~~~~~~~~~~
+
+The following examples demonstrate how to handle missing values in a dataset.
+
+..  code:: python
+
+    from arm_preprocessing.dataset import Dataset
+
+    # Initialise dataset with filename and format
+    dataset = Dataset('examples/missing_values/data', format='csv')
+
+    # Load dataset
+    dataset.load()
+
+    # Remove columns with missing data
+    dataset.missing_values(method='column')
+
+..  code:: python
+
+    from arm_preprocessing.dataset import Dataset
+
+    # Initialise dataset with filename and format
+    dataset = Dataset('examples/missing_values/data', format='csv')
+
+    # Load dataset
+    dataset.load()
+
+    # Remove rows with missing data
+    dataset.missing_values(method='row')
+
+..  code:: python
+
+    from arm_preprocessing.dataset import Dataset
+
+    # Initialise dataset with filename and format
+    dataset = Dataset('examples/missing_values/data', format='csv')
+
+    # Load dataset
+    dataset.load()
+
+    # Impute missing data
+    dataset.missing_values(method='impute')
 
 ..  _data discretisation:
 
@@ -153,48 +199,31 @@ The following examples demonstrate how to squash a dataset.
     # Squash dataset
     dataset.squash(threshold=0.99, similarity='cosine')
 
-..  _missing values:
+..  _feature scaling:
 
-Missing values
-~~~~~~~~~~~~~~
+Feature scaling
+~~~~~~~~~~~~~~~
 
-The following examples demonstrate how to handle missing values in a dataset.
-
-..  code:: python
-
-    from arm_preprocessing.dataset import Dataset
-
-    # Initialise dataset with filename and format
-    dataset = Dataset('examples/missing_values/data', format='csv')
-
-    # Load dataset
-    dataset.load()
-
-    # Remove columns with missing data
-    dataset.missing_values(method='column')
+The following examples demonstrate how to scale a dataset.
 
 ..  code:: python
 
     from arm_preprocessing.dataset import Dataset
 
     # Initialise dataset with filename and format
-    dataset = Dataset('examples/missing_values/data', format='csv')
-
-    # Load dataset
+    dataset = Dataset('datasets/Abalone', format='csv')
     dataset.load()
 
-    # Remove rows with missing data
-    dataset.missing_values(method='row')
+    # Scale dataset using normalisation
+    dataset.scale(method='normalisation')
 
 ..  code:: python
 
     from arm_preprocessing.dataset import Dataset
 
     # Initialise dataset with filename and format
-    dataset = Dataset('examples/missing_values/data', format='csv')
-
-    # Load dataset
+    dataset = Dataset('datasets/Abalone', format='csv')
     dataset.load()
 
-    # Impute missing data
-    dataset.missing_values(method='impute')
+    # Scale dataset using standardisation
+    dataset.scale(method='standardisation')

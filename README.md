@@ -18,7 +18,7 @@
 arm-preprocessing is a lightweight Python library supporting several key steps involving data preparation, manipulation, and discretisation for Association Rule Mining (ARM). 🧠 Embrace its minimalistic design that prioritises simplicity. 💡 The framework is intended to be fully extensible and offers seamless integration with related ARM libraries (e.g., [NiaARM](https://github.com/firefly-cpp/NiaARM)). 🔗
 
 ## Why arm-preprocessing?
-While numerous libraries facilitate data mining preprocessing tasks, this library is designed to integrate seamlessly with association rule mining. It harmonizes well with the NiaARM library, a robust numerical association rule mining framework. The primary aim is to bridge the gap between preprocessing and rule mining, simplifying the workflow/pipeline. Additionally, its design allows for the effortless incorporation of new preprocessing methods and fast benchmarking.
+While numerous libraries facilitate data mining preprocessing tasks, this library is designed to integrate seamlessly with association rule mining. It harmonises well with the NiaARM library, a robust numerical association rule mining framework. The primary aim is to bridge the gap between preprocessing and rule mining, simplifying the workflow/pipeline. Additionally, its design allows for the effortless incorporation of new preprocessing methods and fast benchmarking.
 
 ## Key features ✨
 - Loading various formats of datasets (CSV, JSON, TXT) 📊
@@ -54,6 +54,23 @@ dataset.load_data()
 df = dataset.data
 ```
 
+### Missing values
+The following example demonstrates how to handle missing values in a dataset using imputation. More examples can be found in the [examples/missing_values](./examples/missing_values) directory:
+- [Handling missing values in a dataset using row deletion](./examples/missing_values/missing_values_rows.py)
+- [Handling missing values in a dataset using column deletion](./examples/missing_values/missing_values_columns.py)
+- [Handling missing values in a dataset using imputation](./examples/missing_values/missing_values_impute.py)
+
+```python
+from arm_preprocessing.dataset import Dataset
+
+# Initialise dataset with filename and format
+dataset = Dataset('examples/missing_values/data', format='csv')
+dataset.load()
+
+# Impute missing data
+dataset.missing_values(method='impute')
+```
+
 ### Data discretisation
 The following example demonstrates how to discretise a dataset using the equal width method. More examples can be found in the [examples/discretisation](./examples/discretisation) directory:
 - [Discretising a dataset using the equal width method](./examples/discretisation/equal_width_discretisation.py)
@@ -87,22 +104,22 @@ dataset.load()
 dataset.squash(threshold=0.75, similarity='euclidean')
 ```
 
-### Missing values
-The following example demonstrates how to handle missing values in a dataset using imputation. More examples can be found in the [examples/missing_values](./examples/missing_values) directory:
-- [Handling missing values in a dataset using row deletion](./examples/missing_values/missing_values_rows.py)
-- [Handling missing values in a dataset using column deletion](./examples/missing_values/missing_values_columns.py)
-- [Handling missing values in a dataset using imputation](./examples/missing_values/missing_values_impute.py)
+### Feature scaling
+The following example demonstrates how to scale the dataset's features. More examples can be found in the [examples/scaling](./examples/scaling) directory:
+- [Scale features using normalisation](./examples/scaling/normalisation.py)
+- [Scale features using standardisation](./examples/scaling/standardisation.py)
 
 ```python
 from arm_preprocessing.dataset import Dataset
 
 # Initialise dataset with filename and format
-dataset = Dataset('examples/missing_values/data', format='csv')
+dataset = Dataset('datasets/Abalone', format='csv')
 dataset.load()
 
-# Impute missing data
-dataset.missing_values(method='impute')
+# Scale dataset using normalisation
+dataset.scale(method='normalisation')
 ```
+
 
 ## Related frameworks 🔗
 
