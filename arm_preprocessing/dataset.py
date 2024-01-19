@@ -258,6 +258,35 @@ class Dataset:
         # Squash data
         self.data = Squash.squash(self.data, threshold, similarity)
 
+    def scale(self, method):
+        """
+        Scale the dataset using the specified method.
+
+        Args:
+            method (str): Scaling method ('normalisation', 'standardisation').
+
+        Raises:
+            ValueError: Invalid scaling method.
+        """
+        # Validate method
+        if method not in ['normalisation', 'standardisation']:
+            raise ValueError(f'Invalid scaling method: {method}')
+
+        # Scale data
+        for column in self.data.columns:
+            # Skip non-numerical columns
+            if self.data[column].dtype in ['datetime64[ns]', 'object']:
+                continue
+
+            if method == 'normalisation':
+                self.data[column] = (
+                    self.data[column] - self.data[column].min()
+                ) / (self.data[column].max() - self.data[column].min())
+            elif method == 'standardisation':
+                self.data[column] = (
+                    self.data[column] - self.data[column].mean()
+                ) / self.data[column].std()
+
     def filter_between_dates(
         self, start_date=None, end_date=None, datetime_column=None
     ):
