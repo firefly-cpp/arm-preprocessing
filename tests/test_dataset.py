@@ -168,6 +168,35 @@ def test_feature_scaling_invalid_method():
         dataset.scale(method='invalid_method')
 
 
+def test_feature_selection_numerical():
+    # Test feature selection for numerical dataset
+    dataset = Dataset('datasets/sportydatagen', format='csv')
+    dataset.load()
+    no_columns_before = len(dataset.data.columns)
+    dataset.feature_selection(
+        method='pearson', threshold=0.15, class_column='calories')
+    no_columns_after = len(dataset.data.columns)
+    assert no_columns_before > no_columns_after
+
+
+def test_feature_selection_categorical():
+    # Test feature selection for categorical dataset
+    dataset = Dataset('datasets/Abalone', format='csv')
+    dataset.load()
+    with pytest.raises(ValueError, match='Column .* is not numerical'):
+        dataset.feature_selection(
+            method='pearson', threshold=0.15, class_column='Rings')
+
+
+def test_feature_selection_invalid_method():
+    # Test invalid method handling
+    dataset = Dataset('datasets/sportydatagen', format='csv')
+    dataset.load()
+    with pytest.raises(ValueError, match='Invalid feature selection method'):
+        dataset.feature_selection(
+            method='invalid_method', threshold=0.15, class_column='calories')
+
+
 def test_filter_between_dates():
     # Test filtering between dates
     dataset = Dataset(
