@@ -287,6 +287,36 @@ class Dataset:
                     self.data[column] - self.data[column].mean()
                 ) / self.data[column].std()
 
+    def feature_selection(self, method, threshold, class_column):
+        """
+        Select features based on the specified threshold.
+
+        Args:
+            method (str): Feature selection method ('pearson', 'spearman', 'kendall').
+            threshold (float): Threshold.
+            class_column (str): Name of the column containing class labels.
+
+        Raises:
+            ValueError: Invalid feature selection method.            
+
+        Returns:
+            None
+        """
+        # Validate method
+        if method not in ['pearson', 'spearman', 'kendall']:
+            raise ValueError(f'Invalid feature selection method: {method}')
+
+        # Raise ValueError if column in self.data is not numerical
+        for column in self.data.columns:
+            if self.data[column].dtype not in ['int64', 'float64']:
+                raise ValueError(f'Column {column} is not numerical')
+
+        # Calculate feature importance
+        feature_importance = self.data.corr(method=method)[class_column]
+
+        # Select features
+        self.data = self.data[feature_importance[feature_importance >= threshold].index]
+
     def filter_between_dates(
         self, start_date=None, end_date=None, datetime_column=None
     ):
