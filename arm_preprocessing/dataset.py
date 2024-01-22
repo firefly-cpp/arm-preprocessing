@@ -297,7 +297,8 @@ class Dataset:
             class_column (str): Name of the column containing class labels.
 
         Raises:
-            ValueError: Invalid feature selection method.            
+            ValueError: Invalid feature selection method.
+            ValueError: Column is not numerical.
 
         Returns:
             None

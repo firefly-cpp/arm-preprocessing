@@ -120,6 +120,21 @@ dataset.load()
 dataset.scale(method='normalisation')
 ```
 
+### Feature selection
+The following example demonstrates how to select features from a dataset. More examples can be found in the [examples/feature_selection](./examples/feature_selection) directory:
+- [Select features using the Kendall Tau correlation coefficient](./examples/feature_selection/feature_selection.py)
+
+```python
+from arm_preprocessing.dataset import Dataset
+
+# Initialise dataset with filename and format
+dataset = Dataset('datasets/sportydatagen', format='csv')
+dataset.load()
+
+# Feature selection
+dataset.feature_selection(
+    method='kendall', threshold=0.15, class_column='calories')
+```
 
 ## Related frameworks 🔗
 

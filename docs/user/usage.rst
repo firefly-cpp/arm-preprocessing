@@ -17,6 +17,7 @@ This section demonstrates the usage of the arm-preprocessing framework.
 *   :ref:`data discretisation`
 *   :ref:`data squashing`
 *   :ref:`feature scaling`
+*   :ref:`feature selection`
 
 .. _data loading:
 
@@ -227,3 +228,22 @@ The following examples demonstrate how to scale a dataset.
 
     # Scale dataset using standardisation
     dataset.scale(method='standardisation')
+
+..  _feature selection:
+
+Feature selection
+~~~~~~~~~~~~~~~~~
+
+The following examples demonstrate how to select features from a dataset.
+
+..  code:: python
+
+    from arm_preprocessing.dataset import Dataset
+
+    # Initialise dataset with filename and format
+    dataset = Dataset('datasets/sportydatagen', format='csv')
+    dataset.load()
+
+    # Feature selection
+    dataset.feature_selection(
+        method='kendall', threshold=0.15, class_column='calories')
