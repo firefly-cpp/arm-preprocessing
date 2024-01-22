@@ -35,6 +35,17 @@ To install ``arm-preprocessing`` with pip, use:
 ```bash
 pip install arm-preprocessing
 ```
+To install ``arm-preprocessing`` on Alpine Linux, please use:
+
+```sh
+$ apk add py3-arm-preprocessing
+```
+
+To install ``arm-preprocessing`` on Arch Linux, please use an [AUR helper](https://wiki.archlinux.org/title/AUR_helpers):
+
+```sh
+$ yay -Syyu python-arm-preprocessing
+```
 
 ## Usage 🚀
 ### Data loading
