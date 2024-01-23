@@ -203,7 +203,7 @@ class Dataset:
                 if self.data[column].dtype == 'object':
                     self.data[column].fillna(
                         self.data[column].mode()[0], inplace=True)
-                elif self.data[column].dtype == 'datetime64[ns]':
+                elif self.data[column].dtype == 'datetime64[ns]' or self.data[column].dtype == 'category':
                     self.data[column].fillna(
                         self.data[column].mode()[0], inplace=True)
                 else:
