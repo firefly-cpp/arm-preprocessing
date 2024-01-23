@@ -22,7 +22,7 @@ class Dataset:
         data (pd.DataFrame): Dataset.
     """
 
-    def __init__(self, filename, format="csv", target_format=None, datetime_columns=[]):
+    def __init__(self, filename=None, format="csv", target_format=None, datetime_columns=[]):
         """
         Initialise a Dataset instance.
 
