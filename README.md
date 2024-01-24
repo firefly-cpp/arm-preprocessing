@@ -149,7 +149,9 @@ dataset.feature_selection(
 
 ## Related frameworks 🔗
 
-[1] [NiaARM: A minimalistic framework for Numerical Association Rule Mining](https://github.com/firefly-cpp/NiaARM) 
+[1] [NiaARM: A minimalistic framework for Numerical Association Rule Mining](https://github.com/firefly-cpp/NiaARM)
+
+[2] [uARMSolver: universal Association Rule Mining Solver](https://github.com/firefly-cpp/uARMSolver)
 
 ## References 📚
 
