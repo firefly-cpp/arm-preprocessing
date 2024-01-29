@@ -1,3 +1,7 @@
+<p align="center">
+  <img alt="logo" width="300" src=".github/images/logo_black.png">
+</p>
+
 # arm-preprocessing
 ![PyPI Version](https://img.shields.io/pypi/v/arm-preprocessing.svg)
 [![arm-preprocessing](https://github.com/firefly-cpp/arm-preprocessing/actions/workflows/test.yml/badge.svg)](https://github.com/firefly-cpp/arm-preprocessing/actions/workflows/test.yml)
