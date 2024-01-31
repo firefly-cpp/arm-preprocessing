@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "arm-preprocessing"
-version = "0.1.1"
+version = "0.2.0"
 description = "Implementation of several preprocessing techniques for Association Rule Mining (ARM)"
 authors = ["Tadej Lahovnik <lahovnik.tadej@gmail.com>", "Iztok Fister Jr. <iztok@iztok-jr-fister.eu>"]
 keywords = ['association rule mining', 'data science', 'preprocessing']
