@@ -30,6 +30,14 @@ def test_load_data_json_no_datetime():
     assert isinstance(dataset.data, pd.DataFrame)
 
 
+def test_load_data_tcx():
+    # Test loading TCX data
+    dataset = Dataset('datasets/tcx', format='tcx')
+    dataset.load()
+    assert isinstance(dataset.data, pd.DataFrame)
+    assert len(dataset.data) == 2
+
+
 def test_convert_data_csv():
     # Test converting data to CSV format
     dataset = Dataset('datasets/artm_test_dataset', format='json')
