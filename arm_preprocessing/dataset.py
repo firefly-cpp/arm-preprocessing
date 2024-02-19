@@ -1,4 +1,5 @@
 import pandas as pd
+from sport_activities_features.tcx_manipulation import TCXFile
 from arm_preprocessing.discretisation import Discretisation
 from arm_preprocessing.squashing import Squash
 
@@ -9,35 +10,35 @@ class Dataset:
 
     Args:
         filename (str): Name of the file without extension.
-        format (str, optional): Format of the dataset file ('csv', 'txt', 'json'). Default is 'csv'.
+        format (str, optional): Format of the dataset file ('csv', 'txt', 'json', 'tcx'). Default is 'csv'.
         target_format (str, optional): Target format for conversion. Default is None.
         datetime_columns (list, optional): List of columns containing datetime values. Default is an empty list.
 
     Attributes:
         filename (str): Name of the file without extension.
-        format (str): Format of the dataset file ('csv', 'txt', 'json').
+        format (str): Format of the dataset file ('csv', 'txt', 'json', 'tcx').
         target_format (str): Target format for conversion.
         datetime_columns (list): List of columns containing datetime values.
         information (dict): Information about the dataset.
         data (pd.DataFrame): Dataset.
     """
 
-    def __init__(self, filename=None, format="csv", target_format=None, datetime_columns=[]):
+    def __init__(self, filename=None, format='csv', target_format=None, datetime_columns=[]):
         """
         Initialise a Dataset instance.
 
         Args:
             filename (str): Name of the file without extension.
-            format (str, optional): Format of the dataset file ('csv', 'txt', 'json'). Default is 'csv'.
+            format (str, optional): Format of the dataset file ('csv', 'txt', 'json', 'tcx'). Default is 'csv'.
             target_format (str, optional): Target format for conversion. Default is None.
             datetime_columns (list, optional): List of columns containing datetime values. Default is an empty list.
         """
         # Validate format
-        if format not in ['csv', 'txt', 'json']:
+        if format not in ['csv', 'txt', 'json', 'tcx']:
             raise ValueError(f'Invalid format: {format}')
 
         # Initialise attributes
-        self.filename = f'{filename}.{format}'
+        self.filename = filename
         self.format = format
         self.target_format = target_format
         self.datetime_columns = [datetime_columns]
@@ -54,25 +55,31 @@ class Dataset:
             None
         """
         # Load data from file
+        filename = f'{self.filename}.{self.format}'
         if self.format == 'csv' or self.format == 'txt':
             if len(self.datetime_columns[0]) == 0:
-                data = pd.read_csv(self.filename)
+                data = pd.read_csv(filename)
             else:
                 data = pd.read_csv(
-                    self.filename, parse_dates=self.datetime_columns)
+                    filename, parse_dates=self.datetime_columns)
         elif self.format == 'json':
             if len(self.datetime_columns[0]) == 0:
-                data = pd.read_json(self.filename, orient='records')
+                data = pd.read_json(filename, orient='records')
             else:
                 data = pd.read_json(
-                    self.filename, parse_dates=self.datetime_columns, orient='records'
+                    filename, parse_dates=self.datetime_columns, orient='records'
                 )
+        elif self.format == 'tcx':
+            tcx_file = TCXFile()
+            all_files = tcx_file.read_directory(self.filename)
+            data = pd.DataFrame(
+                [tcx_file.extract_integral_metrics(file) for file in all_files])
         self.data = data
 
         # Analyse data
         self.identify_dataset()
 
-    def convert(self, target_format=None, output_filename="converted_data"):
+    def convert(self, target_format=None, output_filename='converted_data'):
         """
         Convert the dataset to the specified target format.
 
@@ -168,7 +175,7 @@ class Dataset:
         print(f'Number of attributes: {len(self.data.columns)}')
         print(f'Dataset type: {self.information["type"]}')
 
-        for column in self.information["columns"]:
+        for column in self.information['columns']:
             if column['type'] == 'categorical':
                 print(f'{column["column"]}: {column["categories"]}')
             if column['type'] == 'numerical':
@@ -237,7 +244,7 @@ class Dataset:
             information=self.information,
         )
 
-    def squash(self, threshold, similarity="euclidean"):
+    def squash(self, threshold, similarity='euclidean'):
         """
         Squash the dataset using the specified threshold and similarity.
 
