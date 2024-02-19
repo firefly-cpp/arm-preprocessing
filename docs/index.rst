@@ -9,7 +9,7 @@ arm-preprocessing is a lightweight Python library supporting several key steps i
 Key features
 ------------
 
-*   Loading various formats of datasets (CSV, JSON, TXT) 📊
+*   Loading various formats of datasets (CSV, JSON, TXT, TCX) 📊
 *   Converting datasets to different formats 🔄
 *   Loading different types of datasets (numerical dataset, discrete dataset, time-series data, text, etc.) 📉
 *   Dataset identification (which type of dataset) 🔍

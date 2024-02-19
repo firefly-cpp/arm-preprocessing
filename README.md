@@ -25,7 +25,7 @@ arm-preprocessing is a lightweight Python library supporting several key steps i
 While numerous libraries facilitate data mining preprocessing tasks, this library is designed to integrate seamlessly with association rule mining. It harmonises well with the NiaARM library, a robust numerical association rule mining framework. The primary aim is to bridge the gap between preprocessing and rule mining, simplifying the workflow/pipeline. Additionally, its design allows for the effortless incorporation of new preprocessing methods and fast benchmarking.
 
 ## Key features ✨
-- Loading various formats of datasets (CSV, JSON, TXT) 📊
+- Loading various formats of datasets (CSV, JSON, TXT, TCX) 📊
 - Converting datasets to different formats 🔄
 - Loading different types of datasets (numerical dataset, discrete dataset, time-series data, text, etc.) 📉
 - Dataset identification (which type of dataset) 🔍
@@ -56,6 +56,7 @@ $ yay -Syyu python-arm-preprocessing
 The following example demonstrates how to load a dataset from a file (csv, json, txt). More examples can be found in the [examples/data_loading](./examples/data_loading/) directory:
 - [Loading a dataset from a CSV file](./examples/data_loading/load_dataset_csv.py)
 - [Loading a dataset from a JSON file](./examples/data_loading/load_dataset_json.py)
+- [Loading a dataset from a TCX file](./examples/data_loading/load_dataset_tcx.py)
 - [Loading a time-series dataset](./examples/data_loading/load_dataset_timeseries.py)
 
 ```python

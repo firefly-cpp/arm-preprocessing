@@ -36,7 +36,7 @@ This section demonstrates the usage of the arm-preprocessing framework.
 Data loading
 ~~~~~~~~~~~~
 
-The following examples demonstrate how to load a dataset from a file (csv, json, txt).
+The following examples demonstrate how to load a dataset from a file (csv, json, txt, tcx).
 
 ..  code:: python
 
@@ -78,7 +78,18 @@ The following examples demonstrate how to load a dataset from a file (csv, json,
     # Print dataset information (columns, categories, min/max values, etc.)
     dataset.dataset_statistics()
 
-    ..  _missing values:
+..  code:: python
+
+    from arm_preprocessing.dataset import Dataset
+
+    # Initialise dataset with path to TCX directory and format
+    dataset = Dataset('datasets/tcx', format='tcx')
+
+    # Load dataset
+    dataset.load()
+
+    # Print dataset information (columns, categories, min/max values, etc.)
+    dataset.dataset_statistics()
 
 .. _missing values:
 
