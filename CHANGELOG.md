@@ -2,7 +2,39 @@
 
 ## [Unreleased](https://github.com/firefly-cpp/arm-preprocessing/tree/HEAD)
 
-[Full Changelog](https://github.com/firefly-cpp/arm-preprocessing/compare/0.1.0...HEAD)
+[Full Changelog](https://github.com/firefly-cpp/arm-preprocessing/compare/0.2.2...HEAD)
+
+**Merged pull requests:**
+
+- build\(deps\): bump aiohttp from 3.9.3 to 3.9.4 [\#21](https://github.com/firefly-cpp/arm-preprocessing/pull/21) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [0.2.2](https://github.com/firefly-cpp/arm-preprocessing/tree/0.2.2) (2024-04-02)
+
+[Full Changelog](https://github.com/firefly-cpp/arm-preprocessing/compare/0.2.1...0.2.2)
+
+## [0.2.1](https://github.com/firefly-cpp/arm-preprocessing/tree/0.2.1) (2024-02-19)
+
+[Full Changelog](https://github.com/firefly-cpp/arm-preprocessing/compare/0.2.0...0.2.1)
+
+**Closed issues:**
+
+- Update key features [\#17](https://github.com/firefly-cpp/arm-preprocessing/issues/17)
+- Draft a new release \(0.2.0\) [\#16](https://github.com/firefly-cpp/arm-preprocessing/issues/16)
+
+## [0.2.0](https://github.com/firefly-cpp/arm-preprocessing/tree/0.2.0) (2024-01-31)
+
+[Full Changelog](https://github.com/firefly-cpp/arm-preprocessing/compare/0.1.1...0.2.0)
+
+**Closed issues:**
+
+- Implement normalization methods [\#15](https://github.com/firefly-cpp/arm-preprocessing/issues/15)
+- Implement feature selection methods [\#14](https://github.com/firefly-cpp/arm-preprocessing/issues/14)
+- Provide several examples combining NiaARM [\#13](https://github.com/firefly-cpp/arm-preprocessing/issues/13)
+- Add simple logo for this project [\#11](https://github.com/firefly-cpp/arm-preprocessing/issues/11)
+
+## [0.1.1](https://github.com/firefly-cpp/arm-preprocessing/tree/0.1.1) (2024-01-17)
+
+[Full Changelog](https://github.com/firefly-cpp/arm-preprocessing/compare/0.1.0...0.1.1)
 
 **Closed issues:**
 
