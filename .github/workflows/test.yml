@@ -48,6 +48,8 @@ jobs:
       if: steps.cache.outputs.cache-hit == 'true'
       run: timeout 10s poetry run pip --version || rm -rf .venv
     - name: Install dependencies
-      run: poetry install
+      run: |
+        poetry install
+        poetry install --extras sport-activities-features
     - name: Run tests
       run: poetry run pytest
