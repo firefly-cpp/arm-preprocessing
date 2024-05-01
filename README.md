@@ -12,6 +12,7 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/firefly-cpp/arm-preprocessing.svg)
 ![Open issues](https://isitmaintained.com/badge/open/firefly-cpp/arm-preprocessing.svg)
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/firefly-cpp/arm-preprocessing.svg)](http://isitmaintained.com/project/firefly-cpp/arm-preprocessing "Average time to resolve an issue")
+[![Packaging status](https://repology.org/badge/tiny-repos/python:arm-preprocessing.svg)](https://repology.org/project/python:arm-preprocessing/versions)
 
 * **Free software:** MIT license
 * **Documentation**: [http://arm-preprocessing.readthedocs.io](http://arm-preprocessing.readthedocs.io)
