@@ -18,11 +18,11 @@ sys.path.insert(0, os.path.abspath('..'))
 # -- Project information -----------------------------------------------------
 
 project = 'arm-preprocessing'
-copyright = '2023-2024, Tadej Lahovnik, Iztok Fister Jr.'
+copyright = '2023-2025, Tadej Lahovnik, Iztok Fister Jr.'
 author = 'Tadej Lahovnik, Iztok Fister Jr.'
 
 # The full version, including alpha/beta/rc tags
-release = '0.2.4'
+release = '0.2.5'
 
 # -- General configuration ---------------------------------------------------
 
