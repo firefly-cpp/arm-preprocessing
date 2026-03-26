@@ -50,6 +50,5 @@ jobs:
     - name: Install dependencies
       run: |
         poetry install
-        poetry install --extras sport-activities-features
     - name: Run tests
       run: poetry run pytest
